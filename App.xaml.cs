@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace ElektronikusEllenorzo
+namespace Elektronikus_ellenőrző
 {
     /// <summary>
     /// Interaction logic for App.xaml
