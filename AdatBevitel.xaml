@@ -1,0 +1,114 @@
+﻿<Window x:Class="ElektronikusEllenorzo.AdatBevitel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElektronikusEllenorzo"
+        mc:Ignorable="d"
+        Title="AdatBevitel" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="199*"/>
+            <ColumnDefinition Width="401*"/>
+            <ColumnDefinition Width="199*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <Label Content="Tanuló adatai&#xD;&#xA;" HorizontalAlignment="Center"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="394">
+                <Grid Height="434" Width="402" HorizontalAlignment="Center">
+                    <TextBox  Width="251"  VerticalAlignment="Top" x:Name="tNev" Margin="0,38,0,0" HorizontalAlignment="Center"/>
+                    <TextBlock IsHitTestVisible="False" Text="Tanuló Neve" Margin="-1,38,0,0" Foreground="DarkGray" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=tNev}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="szHely" Margin="0,88,0,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Születési Hely" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,88,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=szHely}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="szIdo" Margin="0,138,0,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Születési Idő" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,138,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=szIdo}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="anyjaNeve" Margin="0,188,0,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Anyja Neve" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,188,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=anyjaNeve}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="lakcim" Margin="0,238,0,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Lakcím" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,238,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=lakcim}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="beiratkozasIdo" Margin="0,288,0,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Beiratkozás Időpontja" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,288,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=beiratkozasIdo}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <ComboBox HorizontalAlignment="Center" Margin="0,338,0,0" VerticalAlignment="Top" Width="120"/>
+                    <RadioButton x:Name="kollegium" Content="Kollégium" HorizontalAlignment="Center" Margin="0,388,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </ScrollViewer>
+
+        </StackPanel>
+        <!--TODO: Comboboxra Irja ki hogy szakok-->
+
+        <!--TODO: Valamit kezdeni a reszponzivitással, mert gatya-->
+
+
+    </Grid>
+
+
+</Window>

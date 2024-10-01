@@ -23,5 +23,10 @@ namespace ElektronikusEllenorzo
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AdatBevitel adatBevitel = new AdatBevitel();
+            adatBevitel.Show();
+        }
     }
 }
