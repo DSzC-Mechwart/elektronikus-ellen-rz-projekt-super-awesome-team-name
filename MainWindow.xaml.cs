@@ -25,7 +25,7 @@ namespace ElektronikusEllenorzo
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AdatBevitel adatBevitel = new AdatBevitel();
+            StudentDataEntry adatBevitel = new StudentDataEntry();
             adatBevitel.Show();
         }
     }

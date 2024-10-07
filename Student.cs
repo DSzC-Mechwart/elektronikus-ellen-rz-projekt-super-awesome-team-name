@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ElektronikusEllenorzo
+{
+    class Student
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string BirthPlace { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string MotherName { get; set; }
+        public string Address { get; set; }
+        public DateTime EnrollmentDate { get; set; }
+        public string? ClassName { get; set; }
+        public string? ClassChar { get; set; }
+        public bool? Dormitory { get; set; }
+        public string? DormitoryName { get; set; }
+
+        public Student(int id, string name, string birthPlace, DateTime birthDate, string motherName,string address, DateTime enrollmentDate, string? className, string? classChar, bool? dormitory, string? dormitoryName)
+        {
+            Id = id;
+            Name = name;
+            BirthPlace = birthPlace;
+            BirthDate = birthDate;
+            MotherName = motherName;
+            Address = address;
+            EnrollmentDate = enrollmentDate;
+            ClassName = className;
+            ClassChar = classChar;
+            Dormitory = dormitory;
+            DormitoryName = dormitoryName;
+        }
+
+        public Student(int id, string name, string birthPlace, DateTime birthDate, string motherName, string address,DateTime enrollmentDate, string? className, string? classChar, bool? dormitory)
+        {
+            Id = id;
+            Name = name;
+            BirthPlace = birthPlace;
+            BirthDate = birthDate;
+            MotherName = motherName;
+            Address = address;
+            EnrollmentDate = enrollmentDate;
+            ClassName = className;
+            ClassChar = classChar;
+            Dormitory = dormitory;
+            DormitoryName = "";
+        }
+    }
+}
