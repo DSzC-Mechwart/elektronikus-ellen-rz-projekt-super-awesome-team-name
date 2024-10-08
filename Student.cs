@@ -11,16 +11,17 @@ namespace ElektronikusEllenorzo
         public int Id { get; set; }
         public string Name { get; set; }
         public string BirthPlace { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateOnly BirthDate { get; set; }
         public string MotherName { get; set; }
         public string Address { get; set; }
-        public DateTime EnrollmentDate { get; set; }
-        public string? ClassName { get; set; }
-        public string? ClassChar { get; set; }
+        public DateOnly EnrollmentDate { get; set; }
+        public string ClassName { get; set; }
+        public string ClassChar { get; set; }
         public bool? Dormitory { get; set; }
-        public string? DormitoryName { get; set; }
+        public string DormitoryName { get; set; }
+        
 
-        public Student(int id, string name, string birthPlace, DateTime birthDate, string motherName,string address, DateTime enrollmentDate, string? className, string? classChar, bool? dormitory, string? dormitoryName)
+        public Student(int id, string name, string birthPlace, DateOnly birthDate, string motherName,string address, DateOnly enrollmentDate, string className, string classChar, bool? dormitory, string dormitoryName)
         {
             Id = id;
             Name = name;
@@ -35,7 +36,7 @@ namespace ElektronikusEllenorzo
             DormitoryName = dormitoryName;
         }
 
-        public Student(int id, string name, string birthPlace, DateTime birthDate, string motherName, string address,DateTime enrollmentDate, string? className, string? classChar, bool? dormitory)
+        public Student(int id, string name, string birthPlace, DateOnly birthDate, string motherName, string address,DateOnly enrollmentDate, string className, string classChar, bool? dormitory)
         {
             Id = id;
             Name = name;

@@ -26,9 +26,15 @@ namespace ElektronikusEllenorzo
     public partial class StudentDataEntry : Window
     {
         List<Student> studentsDataList = new();
+        string[] tradeArrey = {"Programozó","Gépész","Pék","Lakatos"};
         public StudentDataEntry()
         {
             InitializeComponent();
+
+            foreach (var item in tradeArrey)
+            {
+                szakok.Items.Add(item);
+            }
             
         }
 
@@ -43,33 +49,40 @@ namespace ElektronikusEllenorzo
         {
             //test
             //TODO: Ha hibás adat ne dögöljön meg az alkalmazás:)))
-            string sName, bPlace, any, szulhely, szak, oszt, kolNev;
-            DateTime bT, beir;
-            bool kol;
+            string sName, bPlace, mName, residence, trate, @class, dName;
+            DateOnly bDate, eDate;
+            bool dormitry;
             try
             {
                 sName = tNev.Text;
                 bPlace = szHely.Text;
-                bT = Convert.ToDateTime(szIdo.Text);
-                any = anyjaNeve.Text;
-                szulhely = "Valami";
-                beir = new(2002, 3, 15);
-                szak = "Programozo";
-                oszt = "9.F";
-                kol = Convert.ToBoolean(kollegium.IsChecked);
-                kolNev = kollegiumNev.Text;
+                bDate = DateOnly.Parse(szIdo.Text) ;
+                mName = anyjaNeve.Text;
+                residence = lakcim.Text;
+                eDate = DateOnly.Parse(beiratkozasIdo.Text);
+                trate = szakok.SelectedItem.ToString() ?? "Problema";
+                @class = osztaly.Text;
+                dormitry = Convert.ToBoolean(kollegium.IsChecked);
+                dName = kollegiumNev.Text;
+
 
                 
-                studentsDataList.Add(kol ? new(1, sName, bPlace, bT, any, szulhely, beir, szak, oszt, kol, kolNev) : new(1, sName, bPlace, bT, any, szulhely, beir, szak, oszt, kol, kolNev));
+                studentsDataList.Add(dormitry ? new(1, sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName) : new(1, sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName));
             }
-            catch (FormatException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Hibás adat");
-                throw;
-                
+                if (ex is FormatException || ex is NullReferenceException)
+                {
+                    MessageBox.Show("Hibás adat");
+                    return;
+                }
+
+                return;
+
             }
 
             JsonOut.WriteToJSON(studentsDataList, "studentsData.json");
+
         }
 
         //public void GetStudentDataFromJSON()
@@ -80,13 +93,14 @@ namespace ElektronikusEllenorzo
         //}
 
 
-        public class JsonOut()
+       
+    }
+    public class JsonOut()
+    {
+        public static void WriteToJSON<T>(T list, string fileName)
         {
-            public static void WriteToJSON<T>(T list, string fileName)
-            {
-                string jsonOut = JsonSerializer.Serialize(list);
-                File.WriteAllText(fileName, jsonOut);
-            }
+            string jsonOut = JsonSerializer.Serialize(list);
+            File.WriteAllText(fileName, jsonOut);
         }
     }
 }
