@@ -127,7 +127,7 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <Button x:Name="kuldes" Content="Küldés" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" Width="60" Click="kuldes_Click"/>
+                <Button x:Name="Kuldes" Content="Küldés" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" Width="60" Click="Kuldes_Click"/>
             </Grid>
         </ScrollViewer>
         <Label x:Name="debugL" Content="DEBUG" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

@@ -16,7 +16,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using System.Xml.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ElektronikusEllenorzo
 {
@@ -38,17 +40,14 @@ namespace ElektronikusEllenorzo
             
         }
 
-        private void kuldes_Click(object sender, RoutedEventArgs e)
+        private void Kuldes_Click(object sender, RoutedEventArgs e)
         {
             GetStudentData();
         }
 
-
-
         public void GetStudentData()
         {
-            //test
-            //TODO: Ha hibás adat ne dögöljön meg az alkalmazás:)))
+            Student student;
             string sName, bPlace, mName, residence, trate, @class, dName;
             DateOnly bDate, eDate;
             bool dormitry;
@@ -60,47 +59,87 @@ namespace ElektronikusEllenorzo
                 mName = anyjaNeve.Text;
                 residence = lakcim.Text;
                 eDate = DateOnly.Parse(beiratkozasIdo.Text);
-                trate = szakok.SelectedItem.ToString() ?? "Problema";
+                trate = szakok.SelectedItem.ToString();
                 @class = osztaly.Text;
                 dormitry = Convert.ToBoolean(kollegium.IsChecked);
                 dName = kollegiumNev.Text;
 
 
-                
-                studentsDataList.Add(dormitry ? new(1, sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName) : new(1, sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName));
-            }
-            catch (Exception ex)
-            {
-                if (ex is FormatException || ex is NullReferenceException)
+                EmptyTextBox(sName, bPlace, mName, residence, trate, @class, dName, bDate, eDate);
+
+                if (dormitry)
                 {
-                    MessageBox.Show("Hibás adat");
-                    return;
+                    student = new(0, "", sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName);
+                    //StudentRecordSheetNumber(student);
+                }
+                else
+                {
+                    student = new(0, "", sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry);
+                    //StudentRecordSheetNumber(student);
                 }
 
+                studentsDataList.Add(student);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Hibás adat");
                 return;
 
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Az összes mezőt ki kell tölteni!");
+            }
 
-            JsonOut.WriteToJSON(studentsDataList, "studentsData.json");
-
+            WriteToFiles.WriteToJSON(studentsDataList, "studentsData.json");
+            WriteToFiles.WriteToCSV(studentsDataList, "studentsData.json");
         }
 
-        //public void GetStudentDataFromJSON()
-        //{
-        //    string jsonPath = "studentsData.json";
-        //    Student myDeserializedClass = JsonSerializer.Deserialize<Student>(jsonPath);
+        private void StudentRecordSheetNumber(Student student)
+        {
+            //TODO: Valami jo logikat erre kitalalni
 
-        //}
+            //var classStudents = studentsDataList.Where(s => s.ClassName == student.ClassName).ToList();
 
+            //if (student.EnrollmentDate.Month < 9)
+            //{
+            //    classStudents = classStudents.OrderBy(s => s.Name).ToList();
+            //}
+            //else
+            //{
+            //    classStudents = classStudents.OrderBy(s => s.EnrollmentDate).ToList();
+            //}
 
-       
+            //student.Id = classStudents.Count + 1;
+            //student.RecordSheetNumber = $"{student.Id}/{student.EnrollmentDate.Year}";
+        }
+
+        private void EmptyTextBox(string sName, string bPlace,string mName,string residence,string trate,string @class,string dName, DateOnly bDate, DateOnly eDate)
+        {
+            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trate) || string.IsNullOrEmpty(@class) || string.IsNullOrEmpty(dName) || string.IsNullOrEmpty(bDate.ToString()) || string.IsNullOrEmpty(eDate.ToString()))
+            {
+                throw new NullReferenceException();
+            }
+        }
     }
-    public class JsonOut()
+
+    public class WriteToFiles()
     {
         public static void WriteToJSON<T>(T list, string fileName)
         {
             string jsonOut = JsonSerializer.Serialize(list);
             File.WriteAllText(fileName, jsonOut);
+        }
+
+        public static void WriteToCSV(List<Student> list, string fileName)
+        {
+            string csvOut = "";
+            foreach (var item in list)
+            {
+                csvOut += $"{item.Name};{item.BirthPlace};{item.BirthDate};{item.MotherName};{item.Address};{item.EnrollmentDate};{item.ClassName};{item.ClassChar};{item.Dormitory};{item.DormitoryName}\n";
+            }
+
+            File.WriteAllText(fileName, csvOut);
         }
     }
 }

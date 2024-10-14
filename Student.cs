@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ElektronikusEllenorzo
 {
-    class Student
+    public class Student
     {
         public int Id { get; set; }
+        public string RecordSheetNumber { get; set; }
         public string Name { get; set; }
         public string BirthPlace { get; set; }
         public DateOnly BirthDate { get; set; }
@@ -19,11 +20,10 @@ namespace ElektronikusEllenorzo
         public string ClassChar { get; set; }
         public bool? Dormitory { get; set; }
         public string DormitoryName { get; set; }
-        
-
-        public Student(int id, string name, string birthPlace, DateOnly birthDate, string motherName,string address, DateOnly enrollmentDate, string className, string classChar, bool? dormitory, string dormitoryName)
+        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address, DateOnly enrollmentDate, string className, string classChar, bool? dormitory, string dormitoryName)
         {
             Id = id;
+            RecordSheetNumber = recordSheetNumber;
             Name = name;
             BirthPlace = birthPlace;
             BirthDate = birthDate;
@@ -33,12 +33,13 @@ namespace ElektronikusEllenorzo
             ClassName = className;
             ClassChar = classChar;
             Dormitory = dormitory;
-            DormitoryName = dormitoryName;
+            DormitoryName = dormitoryName;   
         }
 
-        public Student(int id, string name, string birthPlace, DateOnly birthDate, string motherName, string address,DateOnly enrollmentDate, string className, string classChar, bool? dormitory)
+        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address,DateOnly enrollmentDate, string className, string classChar, bool? dormitory)
         {
             Id = id;
+            RecordSheetNumber = recordSheetNumber;
             Name = name;
             BirthPlace = birthPlace;
             BirthDate = birthDate;
