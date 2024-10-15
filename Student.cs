@@ -18,9 +18,9 @@ namespace ElektronikusEllenorzo
         public DateOnly EnrollmentDate { get; set; }
         public string ClassName { get; set; }
         public string ClassChar { get; set; }
-        public bool? Dormitory { get; set; }
+        public bool Dormitory { get; set; }
         public string DormitoryName { get; set; }
-        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address, DateOnly enrollmentDate, string className, string classChar, bool? dormitory, string dormitoryName)
+        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address, DateOnly enrollmentDate, string className, string classChar, bool dormitory, string dormitoryName)
         {
             Id = id;
             RecordSheetNumber = recordSheetNumber;
@@ -36,7 +36,7 @@ namespace ElektronikusEllenorzo
             DormitoryName = dormitoryName;   
         }
 
-        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address,DateOnly enrollmentDate, string className, string classChar, bool? dormitory)
+        public Student(int id, string recordSheetNumber, string name, string birthPlace, DateOnly birthDate, string motherName, string address,DateOnly enrollmentDate, string className, string classChar, bool dormitory)
         {
             Id = id;
             RecordSheetNumber = recordSheetNumber;

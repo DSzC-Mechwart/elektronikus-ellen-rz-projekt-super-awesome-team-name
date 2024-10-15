@@ -27,7 +27,7 @@ namespace ElektronikusEllenorzo
     /// </summary>
     public partial class StudentDataEntry : Window
     {
-        List<Student> studentsDataList = new();
+        public List<Student> studentsDataList = new();
         string[] tradeArrey = {"Programozó","Gépész","Pék","Lakatos"};
         public StudentDataEntry()
         {
@@ -65,7 +65,7 @@ namespace ElektronikusEllenorzo
                 dName = kollegiumNev.Text;
 
 
-                EmptyTextBox(sName, bPlace, mName, residence, trate, @class, dName, bDate, eDate);
+                EmptyTextBox(sName, bPlace, mName, residence, trate, bDate, eDate);
 
                 if (dormitry)
                 {
@@ -114,12 +114,19 @@ namespace ElektronikusEllenorzo
             //student.RecordSheetNumber = $"{student.Id}/{student.EnrollmentDate.Year}";
         }
 
-        private void EmptyTextBox(string sName, string bPlace,string mName,string residence,string trate,string @class,string dName, DateOnly bDate, DateOnly eDate)
+        private void EmptyTextBox(string sName, string bPlace,string mName,string residence,string trate, DateOnly bDate, DateOnly eDate)
+        { 
+
+            //if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trate) || string.IsNullOrEmpty(@class) || string.IsNullOrEmpty(dName) || string.IsNullOrEmpty(bDate.ToString()) || string.IsNullOrEmpty(eDate.ToString()))
+            //{
+            //    throw new NullReferenceException();
+            //}
+        }
+
+        private void Admin_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trate) || string.IsNullOrEmpty(@class) || string.IsNullOrEmpty(dName) || string.IsNullOrEmpty(bDate.ToString()) || string.IsNullOrEmpty(eDate.ToString()))
-            {
-                throw new NullReferenceException();
-            }
+            AdminPanel admin = new(studentsDataList);
+            admin.Show();
         }
     }
 
