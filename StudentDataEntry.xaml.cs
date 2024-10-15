@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace ElektronikusEllenorzo
         private void Kuldes_Click(object sender, RoutedEventArgs e)
         {
             GetStudentData();
+            StudentRecordSheetNumber(studentsDataList);
         }
 
         public void GetStudentData()
@@ -70,12 +72,12 @@ namespace ElektronikusEllenorzo
                 if (dormitry)
                 {
                     student = new(0, "", sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry, dName);
-                    //StudentRecordSheetNumber(student);
+                    StudentRecordSheetNumber(student);
                 }
                 else
                 {
                     student = new(0, "", sName, bPlace, bDate, mName, residence, eDate, trate, @class, dormitry);
-                    //StudentRecordSheetNumber(student);
+                    StudentRecordSheetNumber(student);
                 }
 
                 studentsDataList.Add(student);
@@ -97,21 +99,46 @@ namespace ElektronikusEllenorzo
 
         private void StudentRecordSheetNumber(Student student)
         {
-            //TODO: Valami jo logikat erre kitalalni
+            var studentClass = studentsDataList.Where(x => x.ClassName == student.ClassName).ToList();
+            var preSeptStudents = studentClass.Where(x => x.EnrollmentDate.Month < 9).OrderBy(x => x.Name).ToList();
+            var postSeptStudents = studentClass.Where(x => x.EnrollmentDate.Month <= 9).OrderBy(x => x.EnrollmentDate).ToList();
 
-            //var classStudents = studentsDataList.Where(s => s.ClassName == student.ClassName).ToList();
+            if (student.EnrollmentDate.Month < 9)
+            {
+                preSeptStudents.Add(student);
+                preSeptStudents.OrderBy(x => x.Name).ToList();
+            }
+            else
+            {
+                postSeptStudents.Add(student);
+                postSeptStudents.OrderBy(x => x.EnrollmentDate);
+            }
 
-            //if (student.EnrollmentDate.Month < 9)
-            //{
-            //    classStudents = classStudents.OrderBy(s => s.Name).ToList();
-            //}
-            //else
-            //{
-            //    classStudents = classStudents.OrderBy(s => s.EnrollmentDate).ToList();
-            //}
+            preSeptStudents.Concat(postSeptStudents);
 
-            //student.Id = classStudents.Count + 1;
-            //student.RecordSheetNumber = $"{student.Id}/{student.EnrollmentDate.Year}";
+            int index = 0;
+            foreach (var item in preSeptStudents)
+            {
+                index++;
+                item.Id = index;
+                item.RecordSheetNumber = $"{item.Id}/{item.EnrollmentDate.Year}";
+            }
+
+        }
+        public static void StudentRecordSheetNumber(List<Student> list)
+        {
+            var classes = list.GroupBy(x => x.ClassName).ToList();
+
+            foreach (var item in classes)
+            {
+                int index = 0;
+                foreach (var student in item)
+                {
+                    index++;
+                    student.Id = index;
+                    student.RecordSheetNumber = $"{student.Id}/{student.EnrollmentDate.Year}";
+                }
+            }
         }
 
         private void EmptyTextBox(string sName, string bPlace,string mName,string residence,string trate, DateOnly bDate, DateOnly eDate)

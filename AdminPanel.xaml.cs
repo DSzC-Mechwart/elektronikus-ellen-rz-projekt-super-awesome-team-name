@@ -20,11 +20,13 @@ namespace ElektronikusEllenorzo
     public partial class AdminPanel : Window
     {
         private List<Student> studentsDataList;
-        public AdminPanel(List<Student> student)
-        {
+        public AdminPanel(List<Student> studentsDataList)
+        { 
             InitializeComponent();
-            this.studentsDataList = student;
-            dataGrid.ItemsSource = student;
+            this.studentsDataList = studentsDataList;
+            //TODO: Ezt fixalni
+            studentsDataList.GroupBy(x => x.ClassName);
+            dataGrid.ItemsSource = studentsDataList;
             UpdateStatistics();
         }
 
@@ -47,8 +49,10 @@ namespace ElektronikusEllenorzo
             if (messageBox == MessageBoxResult.Yes)
             {   studentsDataList.Remove(selectedStudent);
                 dataGrid.ItemsSource = null;
+                StudentDataEntry.StudentRecordSheetNumber(studentsDataList);
                 dataGrid.ItemsSource = studentsDataList;
             }
+            UpdateStatistics();
         }
     }
 }
