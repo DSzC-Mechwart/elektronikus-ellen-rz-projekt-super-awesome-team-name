@@ -27,6 +27,7 @@ namespace ElektronikusEllenorzo
         {
             StudentDataEntry adatBevitel = new StudentDataEntry();
             adatBevitel.Show();
+            Close();
         }
     }
 }

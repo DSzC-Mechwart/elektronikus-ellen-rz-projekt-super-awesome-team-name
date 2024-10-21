@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace ElektronikusEllenorzo
 {
@@ -19,40 +20,73 @@ namespace ElektronikusEllenorzo
     /// </summary>
     public partial class AdminPanel : Window
     {
-        private List<Student> studentsDataList;
-        public AdminPanel(List<Student> studentsDataList)
-        { 
+        
+        public AdminPanel()
+        {
+            Debug.Write(StudentDataEntry.studentsDataList);
             InitializeComponent();
-            this.studentsDataList = studentsDataList;
-            //TODO: Ezt fixalni
-            studentsDataList.GroupBy(x => x.ClassName);
-            dataGrid.ItemsSource = studentsDataList;
-            UpdateStatistics();
+            dataGrid.ItemsSource = null;
+            if (StudentDataEntry.studentsDataList != null)
+            {
+                var sorted = StudentDataEntry.studentsDataList.OrderBy(keySelector: x => x.Trade);
+                dataGrid.ItemsSource = sorted;
+                UpdateStatistics();
+            }
+            
         }
 
         private void UpdateStatistics()
         {
-            int dormitryCount = studentsDataList.Count(x => x.Dormitory);
-            int debCount = studentsDataList.Count(x => x.Address.Contains("Debrecen"));
-            int notDebCount = studentsDataList.Count(x => !x.Address.Contains("Debrecen") && !x.Dormitory);
+            var dormitoryCount = StudentDataEntry.studentsDataList.Count(predicate: x => x.Dormitory);
+            var debCount = StudentDataEntry.studentsDataList.Count(predicate: x => x.Address.Contains(value: "Debrecen"));
+            var notDebCount = StudentDataEntry.studentsDataList.Count(predicate: x => !x.Address.Contains(value: "Debrecen") && !x.Dormitory);
 
-            dormCount.Content = $"Kollégisták: {dormitryCount}";
+            dormCount.Content = $"Kollégisták: {dormitoryCount}";
             deb.Content = $"Debreceni: {debCount}";
             notDeb.Content = $"Bejáros: {notDebCount}";
-            studentsCount.Content = $"Felvett tanulók: {studentsDataList.Count}";
+            studentsCount.Content = $"Felvett tanulók: {StudentDataEntry.studentsDataList.Count}";
         }
 
         private void delStudent_Click(object sender, RoutedEventArgs e)
         {
             var selectedStudent = (Student)dataGrid.SelectedItem;
-            MessageBoxResult messageBox = MessageBox.Show("Biztos szeretné törölni a tanulót?", "", MessageBoxButton.YesNo);
+            if (selectedStudent == null)
+            {
+                MessageBox.Show(messageBoxText: "Válassz ki egy tanulót");
+                return;
+            }
+
+            MessageBoxResult messageBox = MessageBox.Show(messageBoxText: "Biztos szeretné törölni a tanulót?", caption: "", button: MessageBoxButton.YesNo);
             if (messageBox == MessageBoxResult.Yes)
-            {   studentsDataList.Remove(selectedStudent);
+            {
+                StudentDataEntry.studentsDataList.Remove(item: selectedStudent);
                 dataGrid.ItemsSource = null;
-                StudentDataEntry.StudentRecordSheetNumber(studentsDataList);
-                dataGrid.ItemsSource = studentsDataList;
+                StudentDataEntry.StudentRecordSheetNumber(list: StudentDataEntry.studentsDataList);
+                var sorted = StudentDataEntry.studentsDataList.OrderBy(keySelector: x => x.Trade);
+                dataGrid.ItemsSource = sorted;
             }
             UpdateStatistics();
+        }
+
+        private void load_Click(object sender, RoutedEventArgs e)
+        {
+            Load load = new();
+            load.Show();
+            Close();
+        }
+
+        private void Vissza_Click(object sender, RoutedEventArgs e)
+        {
+            StudentDataEntry s = new();
+            s.Show();
+            Close();
+        }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+            Save s = new();
+            s.Show();
+            Close();
         }
     }
 }

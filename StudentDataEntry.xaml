@@ -130,8 +130,8 @@
                 <Button x:Name="Kuldes" Content="Küldés" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" Width="60" Click="Kuldes_Click"/>
             </Grid>
         </ScrollViewer>
-        <Label x:Name="debugL" Content="DEBUG" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Admin" Grid.Column="2" Content="Admin" HorizontalAlignment="Left" Margin="149,10,0,0" VerticalAlignment="Top" Click="Admin_Click"/>
+        <Button x:Name="Vissza" Content="Vissza" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Vissza_Click"/>
         <!--TODO: Comboboxra Irja ki hogy szakok-->
 
         <!--TODO: Valamit kezdeni a reszponzivitással, mert gatya-->

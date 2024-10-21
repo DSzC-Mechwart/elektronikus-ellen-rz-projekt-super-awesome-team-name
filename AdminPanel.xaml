@@ -15,7 +15,7 @@
 
         </DataGrid>
         <Grid Grid.Column="1">
-            <StackPanel>
+            <StackPanel Margin="0,0,0,-1">
                 <Label Content=""/>
                 <Button x:Name="delStudent" Content="Delete Student" HorizontalAlignment="Center" Click="delStudent_Click"/>
                 <Label Content=""/>
@@ -23,6 +23,9 @@
                 <Label x:Name="deb" Content="Debreceni:"/>
                 <Label x:Name="notDeb" Content="Bejárós:"/>
                 <Label x:Name="studentsCount" Content="Felvett tanulók:"/>
+                <Button x:Name="save" Content="Save" Click="save_Click" Height="20"/>
+                <Button x:Name="load" Content="Load" Click="load_Click"/>
+                <Button x:Name="Vissza" Content="Vissza" Click="Vissza_Click" Height="20" VerticalContentAlignment="Center"/>
             </StackPanel>
         </Grid>
 

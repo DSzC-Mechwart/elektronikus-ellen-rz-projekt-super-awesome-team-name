@@ -1,0 +1,26 @@
+﻿<Window x:Class="ElektronikusEllenorzo.Save"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElektronikusEllenorzo"
+        mc:Ignorable="d"
+        Title="Save" Height="272" Width="400">
+    <Grid>
+        <TextBox  Width="251"  VerticalAlignment="Top" x:Name="fileName" Margin="0,112,0,0" HorizontalAlignment="Center"/>
+        <TextBlock IsHitTestVisible="False" Text="Fájl neve" Margin="0,112,0,0" Foreground="DarkGray" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=fileName}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Button Content="Save" HorizontalAlignment="Center" Margin="0,170,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="Vissza" Content="Vissza" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Click="Vissza_Click"/>
+    </Grid>
+</Window>
