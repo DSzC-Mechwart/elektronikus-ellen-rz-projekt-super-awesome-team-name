@@ -220,6 +220,13 @@ namespace ElektronikusEllenorzo
         {
             StudentDataEntry.studentsDataList.Clear();
 
+            if (!File.Exists(path))
+            {
+                var file = File.Create(path);
+                file.Close();
+                File.WriteAllText(path, "[]");
+            }
+
             string jsonString = File.ReadAllText(path);
             var json = JsonSerializer.Deserialize<ObservableCollection<Student>>(jsonString);
             foreach (var student in json)

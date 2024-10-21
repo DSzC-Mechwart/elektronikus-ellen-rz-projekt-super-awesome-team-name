@@ -30,6 +30,11 @@ namespace ElektronikusEllenorzo
 
         private void LoadSaveFiles()
         {
+            if (!File.Exists("savedFiles.txt"))
+            {
+                var file = File.Create("savedFiles.txt");
+                file.Close();
+            }
             var line = File.ReadAllText("savedFiles.txt");
             
             var split = line.Split(";");
