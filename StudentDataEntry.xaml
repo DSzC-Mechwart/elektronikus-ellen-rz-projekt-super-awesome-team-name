@@ -112,7 +112,7 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-                <ComboBox x:Name="szakok" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Width="120" Focusable="False" IsEditable="True" IsReadOnly="True" Text="Válassz osztályt"/>
+                <ComboBox x:Name="szakok" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Width="120" Focusable="False" IsEditable="True" IsReadOnly="True" Text="Válassz osztályt" SelectionChanged="ChangeClass"/>
                 <CheckBox x:Name="kollegium" Content="Kollégium" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" IsChecked="False"/>
                 <TextBox  Width="252"  VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="kollegiumNev" Margin="0,360,0,0" IsEnabled="{Binding IsChecked, ElementName=kollegium}"/>
                 <TextBlock IsHitTestVisible="False" Text="Kollégium neve" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,360,0,0" Foreground="DarkGray">

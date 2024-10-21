@@ -38,20 +38,26 @@ namespace ElektronikusEllenorzo
 
         private void LoadFile()
         {
-            if (saveFiles.SelectedItems == null)
+            MessageBoxResult messageBox = MessageBox.Show("Biztos szeretné betölteni az adatokat?", "", MessageBoxButton.YesNo);
+            if (messageBox == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Nincs file kiválasztva");
-                return;
-            }
+                if (saveFiles.SelectedItems == null)
+                {
+                    MessageBox.Show("Nincs file kiválasztva");
+                    return;
+                }
 
-            foreach (var item in saveFiles.SelectedItems)
-            {
-                //ReadFromFiles.ReadFromCSV(item.ToString());
-                ReadFromFiles.ReadFromJSON($"{item.ToString()}.json");
+                foreach (var item in saveFiles.SelectedItems)
+                {
+                    //ReadFromFiles.ReadFromCSV(item.ToString());
+                    ReadFromFiles.ReadFromJSON($"{item.ToString()}.json");
+                }
+
+                AdminPanel a = new AdminPanel();
+                a.Show();
+                Close();
             }
-            AdminPanel a = new AdminPanel();
-            a.Show();
-            Close();
+            
         }
 
         private void load_Click(object sender, RoutedEventArgs e)

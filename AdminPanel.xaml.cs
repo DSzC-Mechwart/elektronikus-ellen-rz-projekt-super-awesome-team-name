@@ -28,7 +28,7 @@ namespace ElektronikusEllenorzo
             dataGrid.ItemsSource = null;
             if (StudentDataEntry.studentsDataList != null)
             {
-                var sorted = StudentDataEntry.studentsDataList.OrderBy(keySelector: x => x.Trade);
+                var sorted = StudentDataEntry.studentsDataList.OrderBy( x => x.Trade);
                 dataGrid.ItemsSource = sorted;
                 UpdateStatistics();
             }
@@ -37,9 +37,9 @@ namespace ElektronikusEllenorzo
 
         private void UpdateStatistics()
         {
-            var dormitoryCount = StudentDataEntry.studentsDataList.Count(predicate: x => x.Dormitory);
-            var debCount = StudentDataEntry.studentsDataList.Count(predicate: x => x.Address.Contains(value: "Debrecen"));
-            var notDebCount = StudentDataEntry.studentsDataList.Count(predicate: x => !x.Address.Contains(value: "Debrecen") && !x.Dormitory);
+            var dormitoryCount = StudentDataEntry.studentsDataList.Count( x => x.Dormitory);
+            var debCount = StudentDataEntry.studentsDataList.Count( x => x.Address.Contains("Debrecen"));
+            var notDebCount = StudentDataEntry.studentsDataList.Count(x => !x.Address.Contains("Debrecen") && !x.Dormitory);
 
             dormCount.Content = $"Kollégisták: {dormitoryCount}";
             deb.Content = $"Debreceni: {debCount}";
@@ -52,17 +52,17 @@ namespace ElektronikusEllenorzo
             var selectedStudent = (Student)dataGrid.SelectedItem;
             if (selectedStudent == null)
             {
-                MessageBox.Show(messageBoxText: "Válassz ki egy tanulót");
+                MessageBox.Show( "Válassz ki egy tanulót");
                 return;
             }
 
-            MessageBoxResult messageBox = MessageBox.Show(messageBoxText: "Biztos szeretné törölni a tanulót?", caption: "", button: MessageBoxButton.YesNo);
+            MessageBoxResult messageBox = MessageBox.Show( "Biztos szeretné törölni a tanulót?","", MessageBoxButton.YesNo);
             if (messageBox == MessageBoxResult.Yes)
             {
-                StudentDataEntry.studentsDataList.Remove(item: selectedStudent);
+                StudentDataEntry.studentsDataList.Remove(selectedStudent);
                 dataGrid.ItemsSource = null;
-                StudentDataEntry.StudentRecordSheetNumber(list: StudentDataEntry.studentsDataList);
-                var sorted = StudentDataEntry.studentsDataList.OrderBy(keySelector: x => x.Trade);
+                StudentDataEntry.StudentRecordSheetNumber(StudentDataEntry.studentsDataList);
+                var sorted = StudentDataEntry.studentsDataList.OrderBy(x => x.Trade);
                 dataGrid.ItemsSource = sorted;
             }
             UpdateStatistics();

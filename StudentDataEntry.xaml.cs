@@ -20,7 +20,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ElektronikusEllenorzo
 {
@@ -71,12 +70,12 @@ namespace ElektronikusEllenorzo
 
                 if (dormitry)
                 {
-                    EmptyTextBox(sName, bPlace, mName, residence, trade, bDate, eDate);
+                    EmptyTextBox(sName, bPlace, mName, residence, trade, bDate, eDate, dName);
                     student = new Student(0, "", sName, bPlace, bDate, mName, residence, eDate, trade, @class, dormitry, dName);
                 }
                 else
                 {
-                    EmptyTextBox(sName, bPlace, mName, residence, trade, bDate, eDate, dName);
+                    EmptyTextBox(sName, bPlace, mName, residence, trade, bDate, eDate);
                     student = new Student(0, "", sName, bPlace, bDate, mName, residence, eDate, trade, @class, dormitry);
                 }
 
@@ -97,12 +96,31 @@ namespace ElektronikusEllenorzo
 
             WriteToFiles.WriteToJSON(studentsDataList, "studentsData.json");
             WriteToFiles.WriteToCSV(studentsDataList, "studentsData.csv");
+
+            MessageBox.Show("Tanuló adatai sikeresen fel lett véve");
         }
 
-        //public void GetStudentData()
-        //{
+        private void ChangeClass(object sender, RoutedEventArgs e)
+        {
+            switch (szakok.SelectedItem)
+            {
+                case "Programozó":
+                    osztaly.Text = "A";
+                    break;
+                case "Gépész":
+                    osztaly.Text = "B";
+                    break;
+                case "Pék":
+                    osztaly.Text = "C";
+                    break;
+                case "Lakaos":
+                    osztaly.Text = "B";
+                    break;
+                default:
+                    break;
+            }
             
-        //}
+        }
 
         private void StudentRecordSheetNumber(Student student)
         {
@@ -151,7 +169,7 @@ namespace ElektronikusEllenorzo
         private static void EmptyTextBox(string sName, string bPlace,string mName,string residence,string trade, string bDate, string eDate)
         {
 
-            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trade) || string.IsNullOrEmpty(bDate.ToString()) || string.IsNullOrEmpty(eDate.ToString()))
+            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trade) || string.IsNullOrEmpty(bDate) || string.IsNullOrEmpty(eDate))
             {
                 throw new NullReferenceException();
             }
@@ -159,7 +177,7 @@ namespace ElektronikusEllenorzo
         private static void EmptyTextBox(string sName, string bPlace, string mName, string residence, string trade, string bDate, string eDate, string dName)
         {
 
-            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trade) ||  string.IsNullOrEmpty(dName) || string.IsNullOrEmpty(bDate.ToString()) || string.IsNullOrEmpty(eDate.ToString()))
+            if (string.IsNullOrEmpty(sName) || string.IsNullOrEmpty(bPlace) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(residence) || string.IsNullOrEmpty(trade) ||  string.IsNullOrEmpty(dName) || string.IsNullOrEmpty(bDate) || string.IsNullOrEmpty(eDate))
             {
                 throw new NullReferenceException();
             }
