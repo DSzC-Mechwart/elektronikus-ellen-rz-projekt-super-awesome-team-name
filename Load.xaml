@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElektronikusEllenorzo"
         mc:Ignorable="d"
-        Title="Load" Height="272" Width="400">
+        Title="Load" Height="272" Width="400" ResizeMode="CanMinimize">
     <Grid>
         <ListBox x:Name="saveFiles" d:ItemsSource="{d:SampleData ItemCount=5}" Height="192" VerticalAlignment="Top"/>
 

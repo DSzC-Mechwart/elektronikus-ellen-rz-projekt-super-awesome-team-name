@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElektronikusEllenorzo"
         mc:Ignorable="d"
-        Title="Save" Height="272" Width="400">
+        Title="Save" Height="272" Width="400" ResizeMode="CanMinimize">
     <Grid>
         <TextBox  Width="251"  VerticalAlignment="Top" x:Name="fileName" Margin="0,112,0,0" HorizontalAlignment="Center"/>
         <TextBlock IsHitTestVisible="False" Text="Fájl neve" Margin="0,112,0,0" Foreground="DarkGray" VerticalAlignment="Top" HorizontalAlignment="Center">

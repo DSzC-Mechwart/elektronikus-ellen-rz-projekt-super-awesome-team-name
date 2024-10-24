@@ -46,7 +46,7 @@ namespace ElektronikusEllenorzo
             MessageBoxResult messageBox = MessageBox.Show("Biztos szeretné betölteni az adatokat?", "", MessageBoxButton.YesNo);
             if (messageBox == MessageBoxResult.Yes)
             {
-                if (saveFiles.SelectedItems == null)
+                if (saveFiles.SelectedItems == null || string.IsNullOrEmpty(saveFiles.SelectedItem.ToString()))
                 {
                     MessageBox.Show("Nincs file kiválasztva");
                     return;
